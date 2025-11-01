@@ -1,0 +1,1255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>PolyhaQ - Quantum Hackathon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+
+/* === 1. GLOBAL STYLES & BLUEQUBIT PALETTE (Light Mode) === */
+:root {
+    --light-bg: #FFFFFF; /* Pure white background */
+    --card-bg: #FFFFFF; /* Cards are also white */
+    --border-color: #E1E4E8; /* Light gray for borders */
+    --text-primary: #1F2328; /* Dark gray for main text */
+    --text-secondary: #57606A; /* Medium gray for subtitles */
+    --accent-blue: #3081F7;
+    --accent-purple: #BF5AF2;
+}
+
+    body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background-color: #ffffff; /* Pure white background */
+    color: #343a40; /* A slightly softer black for text */
+    line-height: 1.6;
+}
+
+    h1, h2, h3 {
+        font-weight: 700;
+        color: #1a202c; /* A darker, more prominent heading color */
+    }
+
+    /* Navigation Bar */
+    .navbar {
+    background-color: #ffffff; /* White background */
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* A subtle shadow to lift it off the page */
+    border-bottom: 1px solid #e2e8f0; /* Light border */
+}
+
+    .navbar-brand {
+        color: white;
+        font-weight: 700;
+        font-size: 1.5em;
+        text-decoration: none;
+    }
+
+    .nav-links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 25px;
+    }
+
+    .nav-links li a {
+    color: #343a40; /* Dark text color */
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+
+    .nav-links li a.active, .nav-links li a:hover {
+    background-color: #f0ebf5; /* A very light purple for hover */
+    color: #6A359C; /* Purple text on hover/active */
+}
+
+    /* Tab Content */
+    .tab-content {
+        display: none;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    /* Header/Hero Section */
+ .hero {
+    background-color: #f8f7fa; /* The very light purple background */
+    /* This is the new, URL-encoded and error-free SVG background */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52' viewBox='0 0 52 52'%3e%3crect width='52' height='52' fill='none' stroke='rgba(106,53,156,0.15)'/%3e%3cpath d='M26,0V52' fill='none' stroke='rgba(106,53,156,0.15)'/%3e%3cpath d='M0,26H52' fill='none' stroke='rgba(106,53,156,0.15)'/%3e%3ccircle cx='26' cy='26' r='2' fill='rgba(106,53,156,0.2)'/%3e%3c/svg%3e");
+    color: #343a40;
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #e2e8f0;
+    animation: pan-background 45s linear infinite; /* Animation remains the same */
+}
+
+/* This keyframes rule should be present right after the .hero rule */
+@keyframes pan-background {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -416px 0; /* Pans horizontally */
+    }
+}
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="wave" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M0 50 Q25 0 50 50 T100 50" stroke="rgba(255,255,255,0.05)" fill="none" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23wave)"/></svg>');
+        opacity: 0.5;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero h1 {
+    font-size: 3.8em;
+    margin-bottom: 15px;
+    color: #1a202c; /* Make heading text dark */
+    letter-spacing: -1px;
+}
+
+    .hero p {
+        font-size: 1.4em;
+        margin-bottom: 40px;
+        opacity: 0.85;
+        font-weight: 300;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+    background: #6A359C; /* The purple from your logo */
+    color: white;
+    box-shadow: 0 4px 15px rgba(106, 53, 156, 0.2); /* Shadow color updated to purple */
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(106, 53, 156, 0.3); /* Hover shadow updated to purple */
+}
+
+    .btn-secondary {
+    background: transparent;
+    color: #6A359C; /* Purple text */
+    border: 2px solid #6A359C; /* Purple border */
+}
+
+.btn-secondary:hover {
+    background: #6A359C; /* Purple background on hover */
+    color: white; /* White text on hover */
+    border-color: #6A359C;
+}
+
+    /* Explanatory Sections */
+    .explanation-section {
+        padding: 80px 20px;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .section-title {
+    text-align: center;
+    font-size: 2.8em;
+    color: #6A359C; /* Changed to purple */
+    margin-bottom: 60px;
+}
+
+.explanation-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 40px;
+align-items: stretch; /* <<< Add this line */
+}
+
+   .explanation-card {
+    background: white;
+    border-radius: 12px;
+    padding: 35px;
+    text-align: left;
+    /* ... other styles ... */
+    display: flex;           /* <<< Add this line */
+    flex-direction: column;  /* <<< Add this line */
+}
+
+    .explanation-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .explanation-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+
+    .explanation-card h3 {
+    color: #6A359C; /* Changed to purple */
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+    .explanation-card p {
+        color: #4a5568; /* A softer text color for paragraphs */
+    }
+
+/* Hackathon Banner */
+.hackathon-banner {
+    background: linear-gradient(135deg, #6A359C 0%, #8A4EBE 100%); /* Changed to a purple gradient */
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+}
+    
+    .hackathon-banner h2 {
+        color: white;
+    }
+
+
+    /* Main Grid (Challenges) */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+        margin: 40px auto;
+        max-width: 1200px;
+    }
+
+    .card {
+        background: #FFFFFF;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-6px);
+        border-color: #00C2CB;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .card img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    /* Challenge Detail Page */
+    #challenge_page {
+        display: none;
+        background: #FFFFFF;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+        max-width: 800px;
+        margin: 40px auto;
+        border: 1px solid #e2e8f0;
+    }
+
+   #challenge_title {
+    color: #6A359C; /* Changed to purple */
+    font-weight: 700;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+    #challenge_image {
+        width: 100%;
+        height: auto; /* Let height adjust to maintain aspect ratio */
+        max-height: 350px;
+        object-fit: contain;
+        border-radius: 10px;
+        margin-bottom: 25px;
+    }
+
+    #challenge_text {
+        line-height: 1.7;
+    }
+
+    .question {
+    margin: 20px 0;
+    padding: 20px;
+    background: #f8fafc;
+    border-left: 4px solid #6A359C; /* Changed to purple */
+    border-radius: 0 8px 8px 0;
+}
+
+    .question h4 {
+    margin-top: 0;
+    color: #6A359C; /* Changed to purple */
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+    /* General Button Styling */
+button {
+    margin-top: 30px;
+    padding: 15px 30px;
+    border: none;
+    background: #6A359C; /* Changed to purple */
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(106, 53, 156, 0.2); /* Shadow updated to purple */
+}
+
+button:hover {
+    background: #562780; /* A darker purple for hover */
+    box-shadow: 0 6px 20px rgba(106, 53, 156, 0.3); /* Hover shadow updated to purple */
+    transform: translateY(-2px);
+}
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .hero h1 { font-size: 2.8em; }
+        .hero p { font-size: 1.2em; }
+        .hero-buttons { flex-direction: column; align-items: center; }
+        .section-title { font-size: 2.2em; }
+        .navbar { flex-direction: column; }
+        .nav-links { margin-top: 15px; }
+    }
+
+
+
+/* Supporters Section Styling */
+.supporters-section {
+    padding: 80px 20px;
+    background-color: #f8f9fa; /* A light gray background to separate it */
+    text-align: center;
+    border-top: 1px solid #e2e8f0;
+}
+
+.supporters-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 60px; /* Space between logos */
+    max-width: 1000px;
+    margin: 60px auto 0;
+}
+
+.supporter-logo img {
+    max-width: 180px; /* Control the max width of the logos */
+    height: auto;
+    filter: grayscale(100%); /* Start as grayscale for a uniform look */
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.supporter-logo img:hover {
+    filter: grayscale(0%); /* Show full color on hover */
+    opacity: 1;
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+
+.team-photo {
+    max-width: 150px; /* Controls the maximum size, adjust if needed */
+    height: auto;      /* This is crucial - it maintains the correct aspect ratio */
+    border-radius: 12px; /* Changes from a circle to soft, rounded corners */
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid #E1E4E8; /* Using a direct color for the border */
+}
+
+/* === Fix for Resource Button Alignment === */
+#resources .explanation-card a {
+    margin-top: auto;
+}
+/* === Fix for Team Card Centering === */
+#team .explanation-card {
+    align-items: center;
+}
+
+/* === Fix for Team Card Text Alignment === */
+#team .explanation-card h3 {
+    min-height: 4em; /* Reserves space for up to two lines of text for the name */
+}
+
+#team .explanation-card p {
+    min-height: 3em; /* Reserves space for the description */
+}
+
+/* === New PennyLane Particle Effect === */
+
+/* The main container for the particles */
+/* The main container for the particles */
+.particles-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    z-index: 0;
+    /* === ADD THE THREE LINES BELOW === */
+    width: 100vw; /* Make the container as wide as the viewport */
+    left: 50%;    /* Move its left edge to the center of the screen */
+    transform: translateX(-50%); /* Pull it back by half its own width to center it */
+}
+
+/* Base style for the particle layers */
+.particles-container::before,
+.particles-container::after {
+    content: '';
+    position: absolute;
+    width: 10px; /* The size of a single particle */
+    height: 10px;
+    border-radius: 50%;
+    animation: floatUp 25s infinite linear;
+}
+
+/* This creates the first layer of particles using box-shadow */
+/* This creates the first layer of 500 particles using box-shadow */
+.particles-container::before {
+    box-shadow: 
+        9vw 8vh 0 0 rgba(135, 206, 250, 0.7),
+        58vw 3vh 0 0 rgba(255, 182, 193, 0.7),
+        88vw 9vh 0 0 rgba(255, 255, 224, 0.8),
+        2vw 61vh 0 0 rgba(135, 206, 250, 0.7),
+        37vw 79vh 0 0 rgba(135, 206, 250, 0.7),
+        77vw 57vh 0 0 rgba(255, 182, 193, 0.7),
+        44vw 68vh 0 0 rgba(255, 255, 224, 0.8),
+        99vw 22vh 0 0 rgba(135, 206, 250, 0.7),
+        15vw 95vh 0 0 rgba(255, 182, 193, 0.7),
+        68vw 48vh 0 0 rgba(255, 182, 193, 0.7),
+        23vw 33vh 0 0 rgba(255, 255, 224, 0.8),
+        71vw 82vh 0 0 rgba(135, 206, 250, 0.7),
+        5vw 41vh 0 0 rgba(135, 206, 250, 0.7),
+        92vw 6vh 0 0 rgba(255, 182, 193, 0.7),
+        49vw 18vh 0 0 rgba(255, 255, 224, 0.8),
+        81vw 88vh 0 0 rgba(255, 182, 193, 0.7),
+        28vw 12vh 0 0 rgba(135, 206, 250, 0.7),
+        63vw 73vh 0 0 rgba(255, 255, 224, 0.8),
+        11vw 52vh 0 0 rgba(255, 182, 193, 0.7),
+        53vw 98vh 0 0 rgba(135, 206, 250, 0.7),
+        86vw 27vh 0 0 rgba(255, 255, 224, 0.8),
+        33vw 64vh 0 0 rgba(255, 182, 193, 0.7),
+        78vw 43vh 0 0 rgba(135, 206, 250, 0.7),
+        19vw 85vh 0 0 rgba(255, 255, 224, 0.8),
+        60vw 1vh 0 0 rgba(255, 182, 193, 0.7),
+        95vw 50vh 0 0 rgba(255, 182, 193, 0.7),
+        41vw 25vh 0 0 rgba(135, 206, 250, 0.7),
+        7vw 77vh 0 0 rgba(255, 255, 224, 0.8),
+        51vw 14vh 0 0 rgba(255, 182, 193, 0.7),
+        84vw 91vh 0 0 rgba(135, 206, 250, 0.7),
+        25vw 38vh 0 0 rgba(255, 255, 224, 0.8),
+        67vw 59vh 0 0 rgba(255, 182, 193, 0.7),
+        1vw 99vh 0 0 rgba(135, 206, 250, 0.7),
+        90vw 31vh 0 0 rgba(255, 255, 224, 0.8),
+        36vw 8vh 0 0 rgba(255, 182, 193, 0.7),
+        74vw 69vh 0 0 rgba(135, 206, 250, 0.7),
+        13vw 20vh 0 0 rgba(255, 255, 224, 0.8),
+        56vw 84vh 0 0 rgba(255, 182, 193, 0.7),
+        97vw 46vh 0 0 rgba(135, 206, 250, 0.7),
+        29vw 55vh 0 0 rgba(255, 255, 224, 0.8),
+        65vw 17vh 0 0 rgba(255, 182, 193, 0.7),
+        3vw 72vh 0 0 rgba(135, 206, 250, 0.7),
+        80vw 2vh 0 0 rgba(255, 255, 224, 0.8),
+        47vw 93vh 0 0 rgba(255, 182, 193, 0.7),
+        21vw 49vh 0 0 rgba(135, 206, 250, 0.7),
+        69vw 28vh 0 0 rgba(255, 255, 224, 0.8),
+        8vw 60vh 0 0 rgba(255, 182, 193, 0.7),
+        94vw 11vh 0 0 rgba(135, 206, 250, 0.7),
+        39vw 76vh 0 0 rgba(255, 255, 224, 0.8),
+        16vw 3vh 0 0 rgba(255, 182, 193, 0.7),
+        50vw 81vh 0 0 rgba(135, 206, 250, 0.7),
+        83vw 36vh 0 0 rgba(255, 255, 224, 0.8),
+        26vw 67vh 0 0 rgba(255, 182, 193, 0.7),
+        72vw 10vh 0 0 rgba(135, 206, 250, 0.7),
+        4vw 96vh 0 0 rgba(255, 255, 224, 0.8),
+        55vw 53vh 0 0 rgba(255, 182, 193, 0.7),
+        91vw 19vh 0 0 rgba(135, 206, 250, 0.7),
+        30vw 89vh 0 0 rgba(255, 255, 224, 0.8),
+        66vw 34vh 0 0 rgba(255, 182, 193, 0.7),
+        12vw 65vh 0 0 rgba(135, 206, 250, 0.7),
+        58vw 21vh 0 0 rgba(255, 255, 224, 0.8),
+        89vw 78vh 0 0 rgba(255, 182, 193, 0.7),
+        24vw 4vh 0 0 rgba(135, 206, 250, 0.7),
+        61vw 94vh 0 0 rgba(255, 255, 224, 0.8),
+        18vw 40vh 0 0 rgba(255, 182, 193, 0.7),
+        52vw 70vh 0 0 rgba(135, 206, 250, 0.7),
+        85vw 13vh 0 0 rgba(255, 255, 224, 0.8),
+        32vw 83vh 0 0 rgba(255, 182, 193, 0.7),
+        76vw 26vh 0 0 rgba(135, 206, 250, 0.7),
+        10vw 58vh 0 0 rgba(255, 255, 224, 0.8),
+        48vw 9vh 0 0 rgba(255, 182, 193, 0.7),
+        96vw 62vh 0 0 rgba(135, 206, 250, 0.7),
+        20vw 16vh 0 0 rgba(255, 255, 224, 0.8),
+        64vw 87vh 0 0 rgba(255, 182, 193, 0.7),
+        6vw 30vh 0 0 rgba(135, 206, 250, 0.7),
+        79vw 5vh 0 0 rgba(255, 255, 224, 0.8),
+        35vw 71vh 0 0 rgba(255, 182, 193, 0.7),
+        73vw 39vh 0 0 rgba(135, 206, 250, 0.7),
+        14vw 92vh 0 0 rgba(255, 255, 224, 0.8),
+        57vw 24vh 0 0 rgba(255, 182, 193, 0.7),
+        98vw 80vh 0 0 rgba(135, 206, 250, 0.7),
+        22vw 6vh 0 0 rgba(255, 255, 224, 0.8),
+        68vw 51vh 0 0 rgba(255, 182, 193, 0.7),
+        9vw 66vh 0 0 rgba(135, 206, 250, 0.7),
+        45vw 12vh 0 0 rgba(255, 255, 224, 0.8),
+        82vw 75vh 0 0 rgba(255, 182, 193, 0.7),
+        27vw 29vh 0 0 rgba(135, 206, 250, 0.7),
+        70vw 97vh 0 0 rgba(255, 255, 224, 0.8),
+        17vw 44vh 0 0 rgba(255, 182, 193, 0.7),
+        59vw 7vh 0 0 rgba(135, 206, 250, 0.7),
+        87vw 56vh 0 0 rgba(255, 255, 224, 0.8),
+        31vw 90vh 0 0 rgba(255, 182, 193, 0.7),
+        75vw 23vh 0 0 rgba(135, 206, 250, 0.7),
+        2vw 86vh 0 0 rgba(255, 255, 224, 0.8),
+        50vw 32vh 0 0 rgba(255, 182, 193, 0.7),
+        93vw 63vh 0 0 rgba(135, 206, 250, 0.7),
+        38vw 15vh 0 0 rgba(255, 255, 224, 0.8),
+        62vw 79vh 0 0 rgba(255, 182, 193, 0.7),
+        10vw 48vh 0 0 rgba(135, 206, 250, 0.7),
+        54vw 4vh 0 0 rgba(255, 255, 224, 0.8),
+        86vw 95vh 0 0 rgba(255, 182, 193, 0.7),
+        29vw 51vh 0 0 rgba(135, 206, 250, 0.7),
+        72vw 18vh 0 0 rgba(255, 255, 224, 0.8),
+        5vw 73vh 0 0 rgba(255, 182, 193, 0.7),
+        49vw 27vh 0 0 rgba(135, 206, 250, 0.7),
+        81vw 83vh 0 0 rgba(255, 255, 224, 0.8),
+        23vw 40vh 0 0 rgba(255, 182, 193, 0.7),
+        67vw 98vh 0 0 rgba(135, 206, 250, 0.7),
+        12vw 61vh 0 0 rgba(255, 255, 224, 0.8),
+        57vw 14vh 0 0 rgba(255, 182, 193, 0.7),
+        90vw 76vh 0 0 rgba(135, 206, 250, 0.7),
+        34vw 33vh 0 0 rgba(255, 255, 224, 0.8),
+        78vw 89vh 0 0 rgba(255, 182, 193, 0.7),
+        15vw 55vh 0 0 rgba(135, 206, 250, 0.7),
+        60vw 22vh 0 0 rgba(255, 255, 224, 0.8),
+        95vw 81vh 0 0 rgba(255, 182, 193, 0.7),
+        40vw 46vh 0 0 rgba(135, 206, 250, 0.7),
+        83vw 10vh 0 0 rgba(255, 255, 224, 0.8),
+        26vw 70vh 0 0 rgba(255, 182, 193, 0.7),
+        71vw 37vh 0 0 rgba(135, 206, 250, 0.7),
+        8vw 93vh 0 0 rgba(255, 255, 224, 0.8),
+        52vw 50vh 0 0 rgba(255, 182, 193, 0.7),
+        88vw 17vh 0 0 rgba(135, 206, 250, 0.7),
+        31vw 85vh 0 0 rgba(255, 255, 224, 0.8),
+        74vw 42vh 0 0 rgba(255, 182, 193, 0.7),
+        19vw 68vh 0 0 rgba(135, 206, 250, 0.7),
+        63vw 2vh 0 0 rgba(255, 255, 224, 0.8),
+        97vw 58vh 0 0 rgba(255, 182, 193, 0.7),
+        42vw 21vh 0 0 rgba(135, 206, 250, 0.7),
+        85vw 78vh 0 0 rgba(255, 255, 224, 0.8),
+        28vw 45vh 0 0 rgba(255, 182, 193, 0.7),
+        73vw 12vh 0 0 rgba(135, 206, 250, 0.7),
+        11vw 99vh 0 0 rgba(255, 255, 224, 0.8),
+        56vw 65vh 0 0 rgba(255, 182, 193, 0.7),
+        99vw 30vh 0 0 rgba(135, 206, 250, 0.7),
+        33vw 8vh 0 0 rgba(255, 255, 224, 0.8),
+        77vw 54vh 0 0 rgba(255, 182, 193, 0.7),
+        20vw 82vh 0 0 rgba(135, 206, 250, 0.7),
+        65vw 26vh 0 0 rgba(255, 255, 224, 0.8),
+        1vw 71vh 0 0 rgba(255, 182, 193, 0.7),
+        84vw 19vh 0 0 rgba(135, 206, 250, 0.7),
+        47vw 63vh 0 0 rgba(255, 255, 224, 0.8),
+        24vw 36vh 0 0 rgba(255, 182, 193, 0.7),
+        69vw 90vh 0 0 rgba(135, 206, 250, 0.7),
+        4vw 47vh 0 0 rgba(255, 255, 224, 0.8),
+        92vw 14vh 0 0 rgba(255, 182, 193, 0.7),
+        36vw 74vh 0 0 rgba(135, 206, 250, 0.7),
+        13vw 31vh 0 0 rgba(255, 255, 224, 0.8),
+        58vw 88vh 0 0 rgba(255, 182, 193, 0.7),
+        95vw 5vh 0 0 rgba(135, 206, 250, 0.7),
+        30vw 59vh 0 0 rgba(255, 255, 224, 0.8),
+        71vw 22vh 0 0 rgba(255, 182, 193, 0.7),
+        8vw 85vh 0 0 rgba(135, 206, 250, 0.7),
+        51vw 41vh 0 0 rgba(255, 255, 224, 0.8),
+        88vw 98vh 0 0 rgba(255, 182, 193, 0.7),
+        21vw 10vh 0 0 rgba(135, 206, 250, 0.7),
+        66vw 67vh 0 0 rgba(255, 255, 224, 0.8),
+        14vw 34vh 0 0 rgba(255, 182, 193, 0.7),
+        59vw 92vh 0 0 rgba(135, 206, 250, 0.7),
+        93vw 25vh 0 0 rgba(255, 255, 224, 0.8),
+        27vw 78vh 0 0 rgba(255, 182, 193, 0.7),
+        70vw 3vh 0 0 rgba(135, 206, 250, 0.7),
+        3vw 53vh 0 0 rgba(255, 255, 224, 0.8),
+        80vw 89vh 0 0 rgba(255, 182, 193, 0.7),
+        46vw 16vh 0 0 rgba(135, 206, 250, 0.7),
+        98vw 72vh 0 0 rgba(255, 255, 224, 0.8),
+        19vw 29vh 0 0 rgba(255, 182, 193, 0.7),
+        64vw 96vh 0 0 rgba(135, 206, 250, 0.7),
+        2vw 49vh 0 0 rgba(255, 255, 224, 0.8),
+        83vw 6vh 0 0 rgba(255, 182, 193, 0.7),
+        42vw 60vh 0 0 rgba(135, 206, 250, 0.7),
+        96vw 23vh 0 0 rgba(255, 255, 224, 0.8),
+        11vw 79vh 0 0 rgba(255, 182, 193, 0.7),
+        55vw 38vh 0 0 rgba(135, 206, 250, 0.7),
+        91vw 93vh 0 0 rgba(255, 255, 224, 0.8),
+        34vw 57vh 0 0 rgba(255, 182, 193, 0.7),
+        78vw 1vh 0 0 rgba(135, 206, 250, 0.7),
+        7vw 64vh 0 0 rgba(255, 255, 224, 0.8),
+        50vw 20vh 0 0 rgba(255, 182, 193, 0.7),
+        89vw 84vh 0 0 rgba(135, 206, 250, 0.7),
+        25vw 43vh 0 0 rgba(255, 255, 224, 0.8),
+        69vw 97vh 0 0 rgba(255, 182, 193, 0.7),
+        16vw 52vh 0 0 rgba(135, 206, 250, 0.7),
+        61vw 15vh 0 0 rgba(255, 255, 224, 0.8),
+        94vw 70vh 0 0 rgba(255, 182, 193, 0.7),
+        37vw 28vh 0 0 rgba(135, 206, 250, 0.7),
+        80vw 87vh 0 0 rgba(255, 255, 224, 0.8),
+        22vw 48vh 0 0 rgba(255, 182, 193, 0.7),
+        67vw 8vh 0 0 rgba(135, 206, 250, 0.7),
+        3vw 91vh 0 0 rgba(255, 255, 224, 0.8),
+        48vw 35vh 0 0 rgba(255, 182, 193, 0.7),
+        85vw 59vh 0 0 rgba(135, 206, 250, 0.7),
+        30vw 11vh 0 0 rgba(255, 255, 224, 0.8),
+        74vw 74vh 0 0 rgba(255, 182, 193, 0.7),
+        13vw 41vh 0 0 rgba(135, 206, 250, 0.7),
+        58vw 99vh 0 0 rgba(255, 255, 224, 0.8),
+        92vw 54vh 0 0 rgba(255, 182, 193, 0.7),
+        35vw 18vh 0 0 rgba(135, 206, 250, 0.7),
+        79vw 80vh 0 0 rgba(255, 255, 224, 0.8),
+        18vw 6vh 0 0 rgba(255, 182, 193, 0.7),
+        63vw 62vh 0 0 rgba(135, 206, 250, 0.7),
+        97vw 26vh 0 0 rgba(255, 255, 224, 0.8),
+        41vw 86vh 0 0 rgba(255, 182, 193, 0.7),
+        82vw 39vh 0 0 rgba(135, 206, 250, 0.7),
+        26vw 9vh 0 0 rgba(255, 255, 224, 0.8),
+        70vw 53vh 0 0 rgba(255, 182, 193, 0.7),
+        6vw 77vh 0 0 rgba(135, 206, 250, 0.7),
+        51vw 31vh 0 0 rgba(255, 255, 224, 0.8),
+        87vw 88vh 0 0 rgba(255, 182, 193, 0.7),
+        29vw 13vh 0 0 rgba(135, 206, 250, 0.7),
+        73vw 69vh 0 0 rgba(255, 255, 224, 0.8),
+        10vw 24vh 0 0 rgba(255, 182, 193, 0.7),
+        55vw 81vh 0 0 rgba(135, 206, 250, 0.7),
+        90vw 45vh 0 0 rgba(255, 255, 224, 0.8),
+        33vw 96vh 0 0 rgba(255, 182, 193, 0.7),
+        77vw 58vh 0 0 rgba(135, 206, 250, 0.7),
+        15vw 17vh 0 0 rgba(255, 255, 224, 0.8),
+        60vw 74vh 0 0 rgba(255, 182, 193, 0.7),
+        94vw 38vh 0 0 rgba(135, 206, 250, 0.7),
+        38vw 91vh 0 0 rgba(255, 255, 224, 0.8),
+        81vw 49vh 0 0 rgba(255, 182, 193, 0.7),
+        23vw 3vh 0 0 rgba(135, 206, 250, 0.7),
+        68vw 66vh 0 0 rgba(255, 255, 224, 0.8),
+        4vw 87vh 0 0 rgba(255, 182, 193, 0.7);
+}
+
+/* This creates a second, slower layer of 500 particles for a parallax effect */
+.particles-container::after {
+    animation-duration: 40s; /* Slower speed */
+    box-shadow: 
+        16vw 88vh 0 0 rgba(255, 182, 193, 0.6),
+        31vw 21vh 0 0 rgba(135, 206, 250, 0.6),
+        46vw 74vh 0 0 rgba(255, 255, 224, 0.7),
+        61vw 9vh 0 0 rgba(255, 182, 193, 0.6),
+        76vw 53vh 0 0 rgba(135, 206, 250, 0.6),
+        91vw 38vh 0 0 rgba(255, 255, 224, 0.7),
+        8vw 97vh 0 0 rgba(255, 182, 193, 0.6),
+        23vw 42vh 0 0 rgba(135, 206, 250, 0.6),
+        38vw 1vh 0 0 rgba(255, 255, 224, 0.7),
+        53vw 66vh 0 0 rgba(255, 182, 193, 0.6),
+        68vw 29vh 0 0 rgba(135, 206, 250, 0.6),
+        83vw 81vh 0 0 rgba(255, 255, 224, 0.7),
+        11vw 58vh 0 0 rgba(255, 182, 193, 0.6),
+        26vw 13vh 0 0 rgba(135, 206, 250, 0.6),
+        41vw 90vh 0 0 rgba(255, 255, 224, 0.7),
+        56vw 34vh 0 0 rgba(255, 182, 193, 0.6),
+        71vw 69vh 0 0 rgba(135, 206, 250, 0.6),
+        86vw 4vh 0 0 rgba(255, 255, 224, 0.7),
+        3vw 84vh 0 0 rgba(255, 182, 193, 0.6),
+        18vw 47vh 0 0 rgba(135, 206, 250, 0.6),
+        33vw 22vh 0 0 rgba(255, 255, 224, 0.7),
+        48vw 78vh 0 0 rgba(255, 182, 193, 0.6),
+        63vw 16vh 0 0 rgba(135, 206, 250, 0.6),
+        78vw 61vh 0 0 rgba(255, 255, 224, 0.7),
+        93vw 27vh 0 0 rgba(255, 182, 193, 0.6),
+        5vw 70vh 0 0 rgba(135, 206, 250, 0.6),
+        20vw 5vh 0 0 rgba(255, 255, 224, 0.7),
+        35vw 89vh 0 0 rgba(255, 182, 193, 0.6),
+        50vw 31vh 0 0 rgba(135, 206, 250, 0.6),
+        65vw 94vh 0 0 rgba(255, 255, 224, 0.7),
+        80vw 50vh 0 0 rgba(255, 182, 193, 0.6),
+        95vw 12vh 0 0 rgba(135, 206, 250, 0.6),
+        13vw 77vh 0 0 rgba(255, 255, 224, 0.7),
+        28vw 2vh 0 0 rgba(255, 182, 193, 0.6),
+        43vw 63vh 0 0 rgba(135, 206, 250, 0.6),
+        58vw 26vh 0 0 rgba(255, 255, 224, 0.7),
+        73vw 80vh 0 0 rgba(255, 182, 193, 0.6),
+        88vw 17vh 0 0 rgba(135, 206, 250, 0.6),
+        1vw 93vh 0 0 rgba(255, 255, 224, 0.7),
+        15vw 49vh 0 0 rgba(255, 182, 193, 0.6),
+        30vw 8vh 0 0 rgba(135, 206, 250, 0.6),
+        45vw 72vh 0 0 rgba(255, 255, 224, 0.7),
+        60vw 37vh 0 0 rgba(255, 182, 193, 0.6),
+        75vw 99vh 0 0 rgba(135, 206, 250, 0.6),
+        90vw 55vh 0 0 rgba(255, 255, 224, 0.7),
+        10vw 23vh 0 0 rgba(255, 182, 193, 0.6),
+        25vw 86vh 0 0 rgba(135, 206, 250, 0.6),
+        40vw 14vh 0 0 rgba(255, 255, 224, 0.7),
+        55vw 68vh 0 0 rgba(255, 182, 193, 0.6),
+        70vw 33vh 0 0 rgba(135, 206, 250, 0.6),
+        85vw 91vh 0 0 rgba(255, 255, 224, 0.7),
+        7vw 45vh 0 0 rgba(255, 182, 193, 0.6),
+        22vw 10vh 0 0 rgba(135, 206, 250, 0.6),
+        37vw 75vh 0 0 rgba(255, 255, 224, 0.7),
+        52vw 18vh 0 0 rgba(255, 182, 193, 0.6),
+        67vw 83vh 0 0 rgba(135, 206, 250, 0.6),
+        82vw 40vh 0 0 rgba(255, 255, 224, 0.7),
+        97vw 6vh 0 0 rgba(255, 182, 193, 0.6),
+        12vw 60vh 0 0 rgba(135, 206, 250, 0.6),
+        27vw 25vh 0 0 rgba(255, 255, 224, 0.7),
+        42vw 88vh 0 0 rgba(255, 182, 193, 0.6),
+        57vw 51vh 0 0 rgba(135, 206, 250, 0.6),
+        72vw 7vh 0 0 rgba(255, 255, 224, 0.7),
+        87vw 71vh 0 0 rgba(255, 182, 193, 0.6),
+        2vw 36vh 0 0 rgba(135, 206, 250, 0.6),
+        17vw 96vh 0 0 rgba(255, 255, 224, 0.7),
+        32vw 59vh 0 0 rgba(255, 182, 193, 0.6),
+        47vw 24vh 0 0 rgba(135, 206, 250, 0.6),
+        62vw 87vh 0 0 rgba(255, 255, 224, 0.7),
+        77vw 43vh 0 0 rgba(255, 182, 193, 0.6),
+        92vw 11vh 0 0 rgba(135, 206, 250, 0.6),
+        9vw 65vh 0 0 rgba(255, 255, 224, 0.7),
+        24vw 30vh 0 0 rgba(255, 182, 193, 0.6),
+        39vw 92vh 0 0 rgba(135, 206, 250, 0.6),
+        54vw 48vh 0 0 rgba(255, 255, 224, 0.7),
+        69vw 3vh 0 0 rgba(255, 182, 193, 0.6),
+        84vw 56vh 0 0 rgba(135, 206, 250, 0.6),
+        99vw 20vh 0 0 rgba(255, 255, 224, 0.7),
+        14vw 82vh 0 0 rgba(255, 182, 193, 0.6),
+        29vw 19vh 0 0 rgba(135, 206, 250, 0.6),
+        44vw 67vh 0 0 rgba(255, 255, 224, 0.7),
+        59vw 32vh 0 0 rgba(255, 182, 193, 0.6),
+        74vw 95vh 0 0 rgba(135, 206, 250, 0.6),
+        89vw 52vh 0 0 rgba(255, 255, 224, 0.7),
+        4vw 76vh 0 0 rgba(255, 182, 193, 0.6),
+        19vw 41vh 0 0 rgba(135, 206, 250, 0.6),
+        34vw 6vh 0 0 rgba(255, 255, 224, 0.7),
+        49vw 85vh 0 0 rgba(255, 182, 193, 0.6),
+        64vw 28vh 0 0 rgba(135, 206, 250, 0.6),
+        79vw 73vh 0 0 rgba(255, 255, 224, 0.7),
+        94vw 39vh 0 0 rgba(255, 182, 193, 0.6),
+        6vw 98vh 0 0 rgba(135, 206, 250, 0.6),
+        21vw 54vh 0 0 rgba(255, 255, 224, 0.7),
+        36vw 15vh 0 0 rgba(255, 182, 193, 0.6),
+        51vw 80vh 0 0 rgba(135, 206, 250, 0.6),
+        66vw 44vh 0 0 rgba(255, 255, 224, 0.7),
+        81vw 2vh 0 0 rgba(255, 182, 193, 0.6),
+        96vw 64vh 0 0 rgba(135, 206, 250, 0.6),
+        10vw 29vh 0 0 rgba(255, 255, 224, 0.7),
+        25vw 91vh 0 0 rgba(255, 182, 193, 0.6),
+        40vw 46vh 0 0 rgba(135, 206, 250, 0.6),
+        55vw 11vh 0 0 rgba(255, 255, 224, 0.7),
+        70vw 70vh 0 0 rgba(255, 182, 193, 0.6),
+        85vw 35vh 0 0 rgba(135, 206, 250, 0.6),
+        2vw 89vh 0 0 rgba(255, 255, 224, 0.7),
+        17vw 57vh 0 0 rgba(255, 182, 193, 0.6),
+        32vw 20vh 0 0 rgba(135, 206, 250, 0.6),
+        47vw 81vh 0 0 rgba(255, 255, 224, 0.7),
+        62vw 45vh 0 0 rgba(255, 182, 193, 0.6),
+        77vw 3vh 0 0 rgba(135, 206, 250, 0.6),
+        92vw 68vh 0 0 rgba(255, 255, 224, 0.7),
+        9vw 33vh 0 0 rgba(255, 182, 193, 0.6),
+        24vw 95vh 0 0 rgba(135, 206, 250, 0.6),
+        39vw 50vh 0 0 rgba(255, 255, 224, 0.7),
+        54vw 16vh 0 0 rgba(255, 182, 193, 0.6),
+        69vw 79vh 0 0 rgba(135, 206, 250, 0.6),
+        84vw 25vh 0 0 rgba(255, 255, 224, 0.7),
+        99vw 84vh 0 0 rgba(255, 182, 193, 0.6),
+        14vw 48vh 0 0 rgba(135, 206, 250, 0.6),
+        29vw 7vh 0 0 rgba(255, 255, 224, 0.7),
+        44vw 62vh 0 0 rgba(255, 182, 193, 0.6),
+        59vw 27vh 0 0 rgba(135, 206, 250, 0.6),
+        74vw 88vh 0 0 rgba(255, 255, 224, 0.7),
+        89vw 53vh 0 0 rgba(255, 182, 193, 0.6),
+        4vw 18vh 0 0 rgba(135, 206, 250, 0.6),
+        19vw 76vh 0 0 rgba(255, 255, 224, 0.7),
+        34vw 41vh 0 0 rgba(255, 182, 193, 0.6),
+        49vw 5vh 0 0 rgba(135, 206, 250, 0.6),
+        64vw 93vh 0 0 rgba(255, 255, 224, 0.7),
+        79vw 58vh 0 0 rgba(255, 182, 193, 0.6),
+        94vw 22vh 0 0 rgba(135, 206, 250, 0.6),
+        6vw 86vh 0 0 rgba(255, 255, 224, 0.7),
+        21vw 51vh 0 0 rgba(255, 182, 193, 0.6),
+        36vw 14vh 0 0 rgba(135, 206, 250, 0.6),
+        51vw 78vh 0 0 rgba(255, 255, 224, 0.7),
+        66vw 43vh 0 0 rgba(255, 182, 193, 0.6),
+        81vw 8vh 0 0 rgba(135, 206, 250, 0.6),
+        96vw 67vh 0 0 rgba(255, 255, 224, 0.7),
+        10vw 32vh 0 0 rgba(255, 182, 193, 0.6),
+        25vw 98vh 0 0 rgba(135, 206, 250, 0.6),
+        40vw 60vh 0 0 rgba(255, 255, 224, 0.7),
+        55vw 24vh 0 0 rgba(255, 182, 193, 0.6),
+        70vw 85vh 0 0 rgba(135, 206, 250, 0.6),
+        85vw 49vh 0 0 rgba(255, 255, 224, 0.7),
+        2vw 13vh 0 0 rgba(255, 182, 193, 0.6),
+        17vw 75vh 0 0 rgba(135, 206, 250, 0.6),
+        32vw 40vh 0 0 rgba(255, 255, 224, 0.7),
+        47vw 96vh 0 0 rgba(255, 182, 193, 0.6),
+        62vw 61vh 0 0 rgba(135, 206, 250, 0.6),
+        77vw 26vh 0 0 rgba(255, 255, 224, 0.7),
+        92vw 89vh 0 0 rgba(255, 182, 193, 0.6),
+        9vw 54vh 0 0 rgba(135, 206, 250, 0.6),
+        24vw 19vh 0 0 rgba(255, 255, 224, 0.7),
+        39vw 83vh 0 0 rgba(255, 182, 193, 0.6),
+        54vw 47vh 0 0 rgba(135, 206, 250, 0.6),
+        69vw 12vh 0 0 rgba(255, 255, 224, 0.7),
+        84vw 72vh 0 0 rgba(255, 182, 193, 0.6),
+        99vw 37vh 0 0 rgba(135, 206, 250, 0.6),
+        14vw 94vh 0 0 rgba(255, 255, 224, 0.7),
+        29vw 59vh 0 0 rgba(255, 182, 193, 0.6),
+        44vw 23vh 0 0 rgba(135, 206, 250, 0.6),
+        59vw 87vh 0 0 rgba(255, 255, 224, 0.7);
+}
+
+/* The animation that makes the particles float up */
+@keyframes floatUp {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100vh); /* Moves up by the full height of the screen */
+    }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+        
+<a href="#" class="navbar-brand">
+  <img src="drawing.png" alt="PolyhaQ Logo" style="height: 100px; vertical-align: middle;">
+</a>
+
+  
+    <ul class="nav-links">
+      <li><a href="#home" class="tab-link active" onclick="showTab('home')">Home</a></li>
+      <li><a href="#resources" class="tab-link" onclick="showTab('resources')">Resources</a></li>
+      <li><a href="#challenges" class="tab-link" onclick="showTab('challenges')">Challenges</a></li>
+      <li><a href="#team" class="tab-link" onclick="showTab('team')">Team</a></li>
+      <li><a href="#contact" class="tab-link" onclick="showTab('contact')">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Home Tab -->
+  <div id="home" class="tab-content active">
+    <!-- Hero Section -->
+    <section class="hero">
+
+      <!-- Add this new div -->
+      <div class="particles-container"></div>
+
+      <div class="hero-content">
+      <div class="hero-content">
+        <img src="drawing.png" alt="PolyhaQ Logo" style="height: 250px; margin-bottom: 20px;">
+        <h1>🏆 PolyhaQ <br> Quantum Hackathon</h1>
+        <p>Discover quantum innovations faster with hands-on challenges.</p>
+        <p style="font-size: 1.1em; opacity: 0.8;">Built by researchers, for the next generation of quantum pioneers.</p>
+        <div class="hero-buttons">
+          <a href="#challenges" class="btn-primary" onclick="showTab('challenges')">Join the Hackathon</a>
+          <a href="https://pennylane.ai/" target="_blank" class="btn-secondary">Explore PennyLane</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hackathon Banner -->
+    <div class="hackathon-banner">
+      <h2>NEW CHALLENGE EVENT</h2>
+      <p>Powered by PennyLane v0.43 – Tackle quantum circuits, games, hardware, chemistry, and ML in this exciting hackathon. Register now and win prizes!</p>
+      <a href="#challenges" style="color: white; text-decoration: none; font-weight: 500;" onclick="showTab('challenges')">Read More →</a>
+    </div>
+
+    <!-- Explanatory Sections -->
+    <section class="explanation-section">
+      <h2 class="section-title">Master Quantum Fundamentals</h2>
+      <div class="explanation-grid">
+        <div class="explanation-card">
+          <img src="1.png" alt="Quantum Circuits" onerror="this.src='https://placehold.co/600x400/0052CC/FFFFFF?text=Quantum+Circuits';">
+          <h3>Quantum Circuits</h3>
+          <p>Build and simulate quantum algorithms using PennyLane's intuitive circuit model. Learn superposition, entanglement, and gates.</p>
+        </div>
+        <div class="explanation-card">
+          <img src="5.png" alt="Quantum ML" onerror="this.src='https://placehold.co/600x400/00C2CB/FFFFFF?text=Quantum+ML';">
+          <h3>Quantum Machine Learning</h3>
+          <p>Integrate quantum kernels and variational circuits with classical ML frameworks like PyTorch for hybrid models.</p>
+        </div>
+        <div class="explanation-card">
+          <img src="4.png" alt="Quantum Chemistry" onerror="this.src='https://placehold.co/600x400/FF6B6B/FFFFFF?text=Quantum+Chemistry';">
+          <h3>Quantum Chemistry</h3>
+          <p>Simulate molecular systems and ground states with tools like VQE, accelerating drug discovery and materials science.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Resources Tab -->
+  <div id="resources" class="tab-content">
+    <div class="explanation-section">
+      <h2 class="section-title">Learning Resources</h2>
+      <div class="explanation-grid">
+        <!-- Add your resources here -->
+        <div class="explanation-card">
+          <h3>PennyLane Documentation</h3>
+          <p>Official documentation for the PennyLane library. A comprehensive guide to all its features.</p>
+          <a href="https://pennylane.ai/qml/" target="_blank"><button>View Docs</button></a>
+        </div>
+        <div class="explanation-card">
+          <h3>Quantum Computing Videos</h3>
+          <p>A curated playlist of videos to help you get started with the fundamental concepts of quantum computing.</p>
+          <a href="https://www.youtube.com/qiskit" target="_blank"><button>Watch Videos</button></a>
+        </div>
+        <div class="explanation-card">
+          <h3>Qiskit Textbook</h3>
+          <p>An open-source textbook that provides an introduction to quantum computing and its applications.</p>
+          <a href="https://qiskit.org/textbook/preface.html" target="_blank"><button>Read Textbook</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Challenges Tab -->
+  <div id="challenges" class="tab-content">
+    <!-- Main Menu -->
+    <div id="home_page">
+      <div class="explanation-section">
+        <h2 class="section-title">Select a Challenge</h2>
+        <div id="challenge_grid" class="grid"></div>
+      </div>
+    </div>
+
+    <!-- Challenge detail view -->
+    <div id="challenge_page">
+      <h2 id="challenge_title"></h2>
+      <img id="challenge_image" src="" alt="Challenge image">
+      <div id="challenge_text"></div>
+      <button onclick="goBack()">⬅ Back</button>
+    </div>
+  </div>
+
+  <!-- Team Tab -->
+  <div id="team" class="tab-content">
+    <div class="explanation-section">
+      <h2 class="section-title">Our Team</h2>
+      <div class="explanation-grid">
+        <!-- Add your team members here -->
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="dr.ashari.png" alt="Photo of Dr. Ada Lovelace">
+          <h3>Negar Ashari Astani,<br> PhD</h3>
+          <p>Computational Physics</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Dr._Habibiyan" alt="Photo of Dr. Ada Lovelace">
+          <h3>Hamidreza Habibiyan, PhD</h3>
+          <p>Photonics</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Dr._Shayeganfar.jpg" alt="Photo of Dr. Ada Lovelace">
+          <h3>Farzaneh Shayeganfar, PhD</h3>
+          <p>Topological Physics</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Dr._Abbasi.jpg" alt="Photo of Dr. Ada Lovelace">
+          <h3>Hossein Abbasi,<br> PhD</h3>
+          <p>Quantum Physics</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Mahdi_Yaghoubi.jpg" alt="Photo of Dr. Ada Lovelace">
+          <h3>Mahdi Yaghoubi Khosrowshahi</h3>
+          <p>Researcher</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Mahmood_hasani.jpg" alt="Photo of Dr. Ada Lovelace">
+          <h3>Mahmood hasani</h3>
+          <p>Researcher</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Hadis_salasi.jpg" alt="Photo of Dr. Ada Lovelace">
+          <h3>Hadis Salasi</h3>
+          <p>Researcher</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Alireza_Rezaei.png" alt="Photo of Dr. Ada Lovelace">
+          <h3>Alireza Rezaei</h3>
+          <p>Researcher</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Amirali_Barghamadi.jpg" alt="Photo of Dr. Ada Lovelace">
+          <h3>Amirali Barghamadi</h3>
+          <p>Researcher</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Nima_Yadollahi.jpg" alt="Photo of Dr. Ada Lovelace">
+          <h3>Nima Yadollahi</h3>
+          <p>Researcher</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Haniyeh_Kazemiyan.jpg" alt="Photo of Dr. Ada Lovelace">
+          <h3>Haniyeh Kazemiyan</h3>
+          <p>Researcher</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Reyhaneh_Salamat.jpg" alt="Photo of Dr. Ada Lovelace">
+          <h3>Reyhaneh Salamat</h3>
+          <p>Researcher</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Kooshan_Maleki.jpeg" alt="Photo of Dr. Ada Lovelace">
+          <h3>Kooshan Maleki</h3>
+          <p>Researcher</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Mohammad_Safa.jpg" alt="Photo of Dr. Ada Lovelace">
+          <h3>Mohammad Safa</h3>
+          <p>Researcher</p>
+        </div>
+        <div class="explanation-card" style="text-align: center;"> <!-- Centering the content -->
+          <img class="team-photo" src="Danial_Heydari.jpg" alt="Photo of Dr. Ada Lovelace">
+          <h3>Danial Heydari</h3>
+          <p>Researcher</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Tab -->
+  <div id="contact" class="tab-content">
+    <div class="explanation-section">
+      <h2 class="section-title">Contact Us</h2>
+      <div style="text-align: center; max-width: 600px; margin: auto;">
+        <p>If you have any questions about the hackathon, feel free to reach out to us.</p>
+        <p><strong>Email:</strong> <a href="mailto:contact@autanglement.com">contact@autanglement.com</a></p>
+      </div>
+    </div>
+  </div>
+
+
+    
+<!-- Supporters Section -->
+  <section class="supporters-section">
+    <h2 class="section-title">Our Supporters</h2>
+    <div class="supporters-grid">
+      
+      <!-- Replace these placeholders with your supporters' logos -->
+      <div class="supporter-logo">
+        <a href="#" target="_blank"><img src="ISNF.jpg" alt="Supporter 1 Logo"></a>
+      </div>
+     <!--
+     <div class="supporter-logo">
+        <a href="#" target="_blank"><img src="https://placehold.co/200x100/ffffff/cccccc?text=Supporter+Two" alt="Supporter 2 Logo"></a>
+      </div>
+      <div class="supporter-logo">
+        <a href="#" target="_blank"><img src="https://placehold.co/200x100/ffffff/cccccc?text=Supporter+Three" alt="Supporter 3 Logo"></a>
+      </div>
+      <div class="supporter-logo">
+        <a href="#" target="_blank"><img src="https://placehold.co/200x100/ffffff/cccccc?text=Supporter+Four" alt="Supporter 4 Logo"></a>
+      </div>-->
+    </div>
+  </section>
+
+  
+
+
+  <script>
+    const TOTAL_CHALLENGES = 5;
+    // === Dynamic Navbar Script ===
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 50) { // Activates after scrolling 50 pixels
+    navbar.classList.add('navbar-scrolled');
+  } else {
+    navbar.classList.remove('navbar-scrolled');
+  }
+});
+
+    // List of descriptions for grid cards
+    const description_list = [
+      "Quantum Circuits",
+      "Quantum Games",
+      "Quantum Hardware",
+      "Quantum Chemistry",
+      "Quantum Machine Learning"
+    ];
+
+    // UPDATED: More explicit and technical challenge content
+    const challenge_content = {
+      1: {
+        description: "Explore the fundamentals of quantum circuits, gates, and entanglement. This challenge focuses on constructing and analyzing the behavior of quantum states.",
+        questions: [
+          "Write down the 4x4 matrix representation of a CNOT gate where the first qubit is the control and the second is the target. Show its effect on the state |01⟩.",
+          "Design a quantum circuit using Hadamard and CNOT gates to generate a 3-qubit GHZ state: |GHZ⟩ = (|000⟩ + |111⟩) / sqrt(2).",
+          "A qubit is in the state |ψ⟩ = α|0⟩ + β|1⟩. What is the mathematical expression for the expectation value of the Pauli Z operator, ⟨Z⟩?"
+        ]
+      },
+      2: {
+        description: "Dive into the strategic elements of quantum games, where moves can exist in superpositions and outcomes are probabilistic.",
+        questions: [
+          "In Quantum Tic-Tac-Toe, a player can make a 'superposition move'. Design a 2-qubit circuit that could represent such a move, placing a marker on two squares simultaneously. Explain your choice of gates.",
+          "Consider a quantum prisoner's dilemma game where players' strategies are represented by a unitary operator U(θ, α, β). What is the role of the entanglement parameter γ in the initial state |ψ⟩ = cos(γ/2)|CC⟩ + i sin(γ/2)|DD⟩?",
+          "Implement a circuit for the 'quantum penny flip' game. The circuit should involve three operators: one for the first player (Q), one for the second player (P), and a final Hadamard gate for the referee. What strategy for Q guarantees a win?"
+        ]
+      },
+      3: {
+        description: "Understand the physical implementation of quantum hardware and the mathematical models used to describe noise and decoherence.",
+        questions: [
+          "Explain the relationship between decoherence times T1 (amplitude damping) and T2 (phase damping). Write the equation that relates T2 to T1 and T_phi (pure dephasing). Why is T2 always less than or equal to 2*T1?",
+          "For a superconducting transmon qubit, the Hamiltonian is often modeled as H = 4E_C * n^2 - E_J * cos(φ). What do the terms E_C, E_J, n, and φ represent? How is the anharmonicity crucial for creating a two-level system?",
+          "Describe the Kraus operator representation for an amplitude damping channel with probability p. Write down the two Kraus operators E_0 and E_1."
+        ]
+      },
+      4: {
+        description: "Apply quantum principles to chemical simulations, focusing on finding molecular ground states and energies.",
+        questions: [
+          "Write the electronic Hamiltonian for the Hydrogen molecule (H₂) in second quantization using creation (a†) and annihilation (a) operators. Explain the physical meaning of the one-electron and two-electron integrals.",
+          "The Variational Quantum Eigensolver (VQE) minimizes the cost function C(θ) = ⟨ψ(θ)|H|ψ(θ)⟩. Sketch a circuit for a simple Unitary Coupled Cluster Singles and Doubles (UCCSD) ansatz, |ψ(θ)⟩, for a minimal basis H₂ simulation.",
+          "What is the Jordan-Wigner transformation used for? Provide the transformation for the creation operator a†_j in terms of Pauli operators (X, Y, Z)."
+        ]
+      },
+      5: {
+        description: "Leverage quantum computing for advanced machine learning tasks by designing quantum circuits that can process classical data.",
+        questions: [
+          "The quantum kernel is defined as K(x_i, x_j) = |⟨φ(x_i)|φ(x_j)⟩|². Design a feature map circuit φ(x) that encodes a 2D classical data point x = [x₁, x₂] into a 2-qubit state using angle encoding (e.g., with RX or RY gates).",
+          "Sketch a simple variational quantum classifier (VQC) circuit. The circuit should have three distinct parts: a data encoding layer, a trainable model circuit (ansatz), and a measurement layer. Explain the role of each part.",
+          "Explain the concept of a 'barren plateau' in the training of quantum neural networks. How does the choice of ansatz (e.g., deep vs. shallow) and the cost function's global nature contribute to this problem?"
+        ]
+      }
+    };
+
+    function showTab(tabId) {
+      // Hide all tab content
+      const tabContents = document.querySelectorAll('.tab-content');
+      tabContents.forEach(content => {
+        content.classList.remove('active');
+      });
+
+      // Deactivate all tab links
+      const tabLinks = document.querySelectorAll('.tab-link');
+      tabLinks.forEach(link => {
+        link.classList.remove('active');
+      });
+
+      // Show the selected tab content
+      document.getElementById(tabId).classList.add('active');
+
+      // Activate the selected tab link
+      document.querySelector(`.tab-link[href="#${tabId}"]`).classList.add('active');
+    }
+
+    // Render the main grid with local images and placeholder text
+    function renderChallengeGrid() {
+      const grid = document.getElementById('challenge_grid');
+      grid.innerHTML = '';
+
+      for (let i = 1; i <= TOTAL_CHALLENGES; i++) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.onclick = () => openChallenge(i);
+
+        const title = `Challenge ${i}`;
+        const desc = description_list[i-1] || 'No description';
+        
+        card.innerHTML = `
+          <img src="${i}.png" alt="Challenge ${i}" onerror="this.src='https://placehold.co/400x280/1a202c/FFFFFF?text=Challenge+${i}';">
+          <h3>${title}</h3>
+          <p style="font-size:14px; color:#666;">${desc}</p>
+        `;
+
+        grid.appendChild(card);
+      }
+    }
+
+    // Show challenge detail page with specific content, local image, and questions
+    function openChallenge(num) {
+      document.getElementById('home_page').style.display = 'none';
+      document.getElementById('challenge_page').style.display = 'block';
+
+      const content = challenge_content[num] || { description: `Description for challenge ${num}`, questions: [] };
+      
+      document.getElementById('challenge_title').textContent = `Challenge ${num}: ${description_list[num-1] || ''}`;
+      document.getElementById('challenge_image').src = `${num}.png`;
+      // UPDATED: Themed placeholders for challenge pages
+      document.getElementById('challenge_image').onerror = function() { this.src = `https://placehold.co/800x400/0d1a26/FFFFFF?text=${description_list[num-1] || 'Challenge'}`; };
+      
+      const textDiv = document.getElementById('challenge_text');
+      textDiv.innerHTML = `<p><strong>Description:</strong> ${content.description}</p>`;
+      
+      if (content.questions.length > 0) {
+        textDiv.innerHTML += '<h3>Questions to Solve:</h3>';
+        content.questions.forEach((q, index) => {
+          textDiv.innerHTML += `<div class="question"><h4>Q${index + 1}:</h4><p>${q}</p></div>`;
+        });
+      } else {
+        textDiv.innerHTML += `<p>Questions for this challenge are not yet available.</p>`;
+      }
+    }
+
+    function goBack() {
+        const challengesTab = document.getElementById('challenges');
+        if (challengesTab.classList.contains('active')) {
+            document.getElementById('home_page').style.display = 'block';
+            document.getElementById('challenge_page').style.display = 'none';
+        }
+    }
+
+    // Initial render
+    renderChallengeGrid();
+
+    // Handle initial tab display based on URL hash
+    document.addEventListener('DOMContentLoaded', () => {
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+            showTab(hash);
+        } else {
+            showTab('home');
+        }
+    });
+
+  </script>
+</body>
+</html>
